@@ -12,11 +12,12 @@
   "main": "./build/proton.min.js",
   "types": "./build/proton.d.ts",
   "scripts": {
-    "start": "concurrently --names \"ROLLUP,HTTP\" -c \"bgBlue.bold,bgGreen.bold\" \"NODE_ENV=dev rollup -c --bundleConfigAsCjs -w -m inline\" \"serve --listen 3001\"",
+    "start": "concurrently --names \"ROLLUP,HTTP\" -c \"bgBlue.bold,bgGreen.bold\" \"cross-env NODE_ENV=dev rollup -c --bundleConfigAsCjs -w -m inline\" \"serve --listen 3001\"",
+    "pre": "cross-env NODE_ENV=dev rollup -c --bundleConfigAsCjs",
     "page": "node ./script/makeexamplepage",
     "lint": "eslint ./src --config=eslintrc.json",
     "travis": "npm run lint",
-    "build": "NODE_ENV=pub rollup -c --bundleConfigAsCjs"
+    "build": "cross-env NODE_ENV=pub rollup -c --bundleConfigAsCjs"
   },
   "repository": {
     "type": "git",
@@ -32,6 +33,7 @@
   "homepage": "http://drawcall.github.io/Proton",
   "devDependencies": {
     "@babel/core": "^7.15.5",
+    "cross-env": "^7.0.3",
     "@babel/eslint-parser": "^7.15.4",
     "@babel/plugin-proposal-class-properties": "^7.14.5",
     "@babel/preset-env": "^7.15.6",

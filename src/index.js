@@ -48,6 +48,7 @@ import PixelRenderer from "./render/PixelRenderer";
 import PixiRenderer from "./render/PixiRenderer";
 import WebGLRenderer from "./render/WebGLRenderer";
 import CustomRenderer from "./render/CustomRenderer";
+import LayaRenderer from "./render/LayaRenderer";
 
 import Zone from "./zone/Zone";
 import LineZone from "./zone/LineZone";
@@ -117,6 +118,7 @@ Proton.PixiRenderer = PixiRenderer;
 Proton.PixelRenderer = PixelRenderer;
 Proton.WebGLRenderer = Proton.WebGlRenderer = WebGLRenderer;
 Proton.CustomRenderer = CustomRenderer;
+Proton.LayaRenderer = LayaRenderer;
 
 Proton.Debug = Debug;
 Util.assign(Proton, ease);
@@ -168,6 +170,7 @@ export {
   PixiRenderer,
   WebGLRenderer,
   CustomRenderer,
+  LayaRenderer,
   Zone,
   LineZone,
   CircleZone,

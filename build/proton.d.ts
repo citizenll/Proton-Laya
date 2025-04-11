@@ -2172,6 +2172,71 @@ declare class CustomRenderer extends BaseRenderer {
 }
 
 /**
+ * Laya3 Renderer using graphics API
+ * @extends BaseRenderer
+ */
+declare class LayaRenderer extends BaseRenderer {
+    /**
+     * Creates a new LayaRenderer instance
+     * @param {Laya.Sprite} element - The Laya container to render to
+     * @param {object} [stroke] - Stroke style {color, thickness}
+     */
+    constructor(element: Laya.Sprite, stroke?: object);
+    graphics: Laya.Graphics;
+    stroke: object | undefined;
+    blendMode: any;
+    /**
+     * Resize the render area
+     * @param {number} width
+     * @param {number} height
+     */
+    resize(width: number, height: number): void;
+    createBody(body: any, particle: any): void;
+    createSprite(body: any, particle: any): void;
+    createCircle(particle: any): void;
+    /**
+     * Handle particle creation
+     * @param {object} particle
+     */
+    onParticleCreated(particle: object): void;
+    getImgFromLaya(body: any, callback: any, param: any): any;
+    /**
+     * Handle particle updates
+     * @param {object} particle
+     */
+    onParticleUpdate(particle: object): void;
+    isImage(target: any): boolean | undefined;
+    /**
+     * Handle particle destruction
+     * @param {object} particle
+     */
+    onParticleDead(particle: object): void;
+    /**
+     * @param particle
+     */
+    onParticleDead(particle: any): void;
+    /**
+     * Add image to particle body
+     * @param {HTMLImageElement} img
+     * @param {object} particle
+     */
+    addImg2Body(img: HTMLImageElement, particle: object): void;
+    /**
+     * Draw image particle
+     * @param {object} particle
+     * @param {Laya.Graphics} graphics
+     */
+    drawImage(particle: object, graphics: Laya.Graphics): void;
+    rgbToHex(particle: any): string;
+    /**
+     * Draw circle particle
+     * @param {object} particle
+     * @param {Laya.Graphics} graphics
+     */
+    drawCircle(particle: object, graphics: Laya.Graphics): void;
+}
+
+/**
  * Represents a line zone for particle systems.
  * @extends Zone
  */
@@ -2391,4 +2456,4 @@ declare namespace _default {
     function drawEmitter(proton: any, canvas: any, emitter: any, clear: any): void;
 }
 
-export { Alpha, ArraySpan, Attraction, Behaviour$1 as Behaviour, BehaviourEmitter, Body, CanvasRenderer, CircleZone, Collision, Color, _default$2 as ColorUtil, CrossZone, CustomRenderer, Cyclone, _default as Debug, DomRenderer, EaselRenderer, Emitter$1 as Emitter, FollowEmitter, Force, Gravity, GravityWell, ImageZone, Initialize, Life, LineZone, Mass, Mat3, MathUtil, Particle$1 as Particle, PixelRenderer, PixiRenderer, PointZone, Polar2D, Pool, Position, Radius, RandomDrift, Rate, RectZone, Rectangle, Repulsion, Rotate, Scale, Span, _default$3 as Util, Vector2D$1 as Vector2D, Velocity, WebGLRenderer, Zone, Proton$1 as default, _default$1 as ease };
+export { Alpha, ArraySpan, Attraction, Behaviour$1 as Behaviour, BehaviourEmitter, Body, CanvasRenderer, CircleZone, Collision, Color, _default$2 as ColorUtil, CrossZone, CustomRenderer, Cyclone, _default as Debug, DomRenderer, EaselRenderer, Emitter$1 as Emitter, FollowEmitter, Force, Gravity, GravityWell, ImageZone, Initialize, LayaRenderer, Life, LineZone, Mass, Mat3, MathUtil, Particle$1 as Particle, PixelRenderer, PixiRenderer, PointZone, Polar2D, Pool, Position, Radius, RandomDrift, Rate, RectZone, Rectangle, Repulsion, Rotate, Scale, Span, _default$3 as Util, Vector2D$1 as Vector2D, Velocity, WebGLRenderer, Zone, Proton$1 as default, _default$1 as ease };

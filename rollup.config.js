@@ -46,7 +46,7 @@ const createConfig = (outputFile, isWeb, plugins) => ({
     format: isWeb ? "iife" : "umd",
     name: "Proton",
     exports: isWeb ? "auto" : "named",
-    sourcemap: true,
+    sourcemap: IS_DEV ? false : true,
     ...(isWeb ? { extend: true } : {}),
   },
   plugins,
