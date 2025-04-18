@@ -1,7 +1,5 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-  typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.Proton = {}));
+  factory(global.Proton = {});
 })(this, (function (exports) { 'use strict';
 
   function _defineProperties(target, props) {
@@ -5214,7 +5212,7 @@
         graphics.blendMode = this.blendMode;
       }
       graphics.alpha = particle.alpha;
-      graphics.drawImage(particle.body, x, y, w, h, this.rgbToHex(particle));
+      graphics.drawTexture(particle.body, x, y, w, h, null, particle.alpha, this.rgbToHex(particle));
       graphics.rotate(MathUtil.degreeTransform(particle.rotation));
       graphics.restore();
     };
@@ -5894,6 +5892,6 @@
   exports.default = Proton;
   exports.ease = ease;
 
-  Object.defineProperty(exports, '__esModule', { value: true });
-
+  exports.Proton = Proton
 }));
+window.proton = Proton.Proton;

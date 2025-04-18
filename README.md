@@ -1,7 +1,7 @@
 <div align=center><img src="https://drawcall.github.io/Proton/images/logo/proton.png"/></div>
 
 ---
-## 支持Laya渲染的 Proton 引擎
+## 支持Laya渲染的 Proton 引擎 (直接使用build/proton.js和 proton.d.ts都是修改版本直接放到项目下libs目录下)
 
 
 <div align="center">

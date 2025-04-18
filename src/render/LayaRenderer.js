@@ -137,10 +137,7 @@ export default class LayaRenderer extends BaseRenderer {
             graphics.blendMode = this.blendMode;
         }
         graphics.alpha = particle.alpha;
-        graphics.drawImage(
-            particle.body,
-            x, y, w, h, this.rgbToHex(particle),
-        );
+        graphics.drawTexture(particle.body, x, y, w, h, null, particle.alpha, this.rgbToHex(particle));
         graphics.rotate(MathUtil.degreeTransform(particle.rotation));
         graphics.restore();
     }
