@@ -1,6 +1,7 @@
+; window.Proton = window.Proton = {};
 (function (global, factory) {
-  factory(global.Proton = {});
-})(this, (function (exports) { 'use strict';
+  factory(global.Proton = {})
+})(window, (function (exports) { 'use strict';
 
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
@@ -1825,6 +1826,30 @@
       };
     },
     /**
+     * converts a hex value to a rgba object
+     *
+     * @memberof Proton#Proton.Util
+     * @method hexToRgba
+     *
+     * @param {String} h any hex value, e.g. #000000ff or 000000ff for black with full opacity
+     *
+     * @return {Object} rgba object with r, g, b, a properties
+     */
+    hexToRgba: function hexToRgba(h) {
+      var hex16 = h.charAt(0) === "#" ? h.substring(1) : h;
+      var r = parseInt(hex16.substring(0, 2), 16);
+      var g = parseInt(hex16.substring(2, 4), 16);
+      var b = parseInt(hex16.substring(4, 6), 16);
+      // 如果有透明度值则解析，否则默认为1
+      var a = hex16.length >= 8 ? parseInt(hex16.substring(6, 8), 16) / 255 : 1;
+      return {
+        r: r,
+        g: g,
+        b: b,
+        a: a
+      };
+    },
+    /**
      * converts a rgb value to a rgb string
      *
      * @memberof Proton#Proton.Util
@@ -3433,6 +3458,88 @@
       }
     };
     return Color;
+  }(Behaviour);
+
+  var Gradient = /*#__PURE__*/function (_Behaviour) {
+    _inheritsLoose(Gradient, _Behaviour);
+    /**
+     * 渐变颜色行为
+     * @constructor
+     * @param {Array} colors 颜色数组（支持十六进制或RGBA格式）
+     * @param {Number} [life=Infinity] 生命周期 
+     * @param {String} [easing=easeLinear] 缓动函数
+     */
+    function Gradient(colors, life, easing) {
+      var _this;
+      _this = _Behaviour.call(this, life, easing) || this;
+      _this.colors = colors;
+      _this.name = "Gradient";
+      _this.reset(colors, life, easing);
+      return _this;
+    }
+    var _proto = Gradient.prototype;
+    _proto.reset = function reset(colors, life, easing) {
+      this.colors = colors;
+      life && _Behaviour.prototype.reset.call(this, life, easing);
+    };
+    _proto.initialize = function initialize(particle) {
+      var colors = this.colors;
+      particle.rgb.a = 1;
+      particle.rgb.reset = function () {
+        this.r = 255;
+        this.g = 255;
+        this.b = 255;
+        this.a = 1;
+      };
+      particle.data.gradientColors = colors.map(function (color) {
+        if (typeof color === 'string') {
+          return ColorUtil.hexToRgba(color);
+        } else if (Array.isArray(color) && color.length === 4) {
+          if (color[0] <= 1) {
+            color[0] = color[0] * 255;
+            color[1] = color[1] * 255;
+            color[2] = color[2] * 255;
+          }
+          return {
+            r: color[0],
+            g: color[1],
+            b: color[2],
+            a: color[3]
+          };
+        }
+        return {
+          r: 255,
+          g: 255,
+          b: 255,
+          a: 1
+        };
+      });
+      // 初始化起始颜色
+      var firstColor = particle.data.gradientColors[0];
+      particle.data.color = firstColor;
+      Object.assign(particle.rgb, firstColor);
+    };
+    _proto.applyBehaviour = function applyBehaviour(particle, time, index) {
+      this.calculate(particle, time, index);
+      var colors = particle.data.gradientColors;
+      var total = colors.length - 1;
+      var indexFloat = this.energy * total;
+      var indexInt = Math.min(Math.floor(indexFloat), total - 1);
+      var ratio = indexFloat - indexInt;
+      var colorA = colors[indexInt];
+      var colorB = colors[indexInt + 1];
+      particle.rgb.r = colorA.r + (colorB.r - colorA.r) * ratio;
+      particle.rgb.g = colorA.g + (colorB.g - colorA.g) * ratio;
+      particle.rgb.b = colorA.b + (colorB.b - colorA.b) * ratio;
+      // 保留原有透明度处理方式
+      particle.rgb.a = colorA.a + (colorB.a - colorA.a) * ratio;
+
+      // 转换为整型RGB值
+      particle.rgb.r = particle.rgb.r << 0;
+      particle.rgb.g = particle.rgb.g << 0;
+      particle.rgb.b = particle.rgb.b << 0;
+    };
+    return Gradient;
   }(Behaviour);
 
   var CHANGING = "changing";
@@ -5207,12 +5314,14 @@
       var h = particle.body.height * particle.scale | 0;
       var x = particle.p.x;
       var y = particle.p.y;
+      x -= w / 2; //粒子x居中
+      // y -= h / 2//粒子y居中
       graphics.save();
       if (this.blendMode) {
         graphics.blendMode = this.blendMode;
       }
       graphics.alpha = particle.alpha;
-      graphics.drawTexture(particle.body, x, y, w, h, null, particle.alpha, this.rgbToHex(particle));
+      graphics.drawTexture(particle.body, x, y, w, h, null, particle.alpha, this.rgbToHex(particle), this.blendMode);
       graphics.rotate(MathUtil.degreeTransform(particle.rotation));
       graphics.restore();
     };
@@ -5815,6 +5924,7 @@
   Proton.Scale = Proton.S = Scale;
   Proton.Rotate = Rotate;
   Proton.Color = Color;
+  Proton.Gradient = Gradient;
   Proton.Repulsion = Repulsion;
   Proton.Cyclone = Cyclone;
   Proton.GravityWell = GravityWell;
@@ -5858,6 +5968,7 @@
   exports.Emitter = Emitter;
   exports.FollowEmitter = FollowEmitter;
   exports.Force = Force;
+  exports.Gradient = Gradient;
   exports.Gravity = Gravity;
   exports.GravityWell = GravityWell;
   exports.ImageZone = ImageZone;
@@ -5891,7 +6002,7 @@
   exports.Zone = Zone;
   exports.default = Proton;
   exports.ease = ease;
+  exports.Proton = Proton;
 
-  exports.Proton = Proton
 }));
 window.proton = Proton.Proton;

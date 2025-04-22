@@ -18,12 +18,19 @@ export default class Gradient extends Behaviour {
   }
 
   reset(colors, life, easing) {
-    this.colorSpan = ArraySpan.createArraySpan(colors);
+    this.colors = colors;
     life && super.reset(life, easing);
   }
 
   initialize(particle) {
-    const colors = this.colorSpan.getValue();
+    const colors = this.colors;
+    particle.rgb.a = 1;
+    particle.rgb.reset = function () {
+      this.r = 255;
+      this.g = 255;
+      this.b = 255;
+      this.a = 1;
+    }
     particle.data.gradientColors = colors.map(color => {
       if (typeof color === 'string') {
         return ColorUtil.hexToRgba(color);
@@ -37,15 +44,10 @@ export default class Gradient extends Behaviour {
       }
       return { r: 255, g: 255, b: 255, a: 1 };
     });
-
     // 初始化起始颜色
     const firstColor = particle.data.gradientColors[0];
-    particle.rgb = {
-      r: firstColor.r,
-      g: firstColor.g,
-      b: firstColor.b,
-      a: firstColor.a
-    };
+    particle.data.color = firstColor
+    Object.assign(particle.rgb, firstColor);
   }
 
   applyBehaviour(particle, time, index) {
