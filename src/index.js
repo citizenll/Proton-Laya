@@ -33,6 +33,7 @@ import Alpha from "./behaviour/Alpha";
 import Scale from "./behaviour/Scale";
 import Rotate from "./behaviour/Rotate";
 import Color from "./behaviour/Color";
+import Gradient from "./behaviour/Gradient";
 import Cyclone from "./behaviour/Cyclone";
 import Repulsion from "./behaviour/Repulsion";
 import GravityWell from "./behaviour/GravityWell";
@@ -96,6 +97,7 @@ Proton.Alpha = Alpha;
 Proton.Scale = Proton.S = Scale;
 Proton.Rotate = Rotate;
 Proton.Color = Color;
+Proton.Gradient = Gradient
 Proton.Repulsion = Repulsion;
 Proton.Cyclone = Cyclone;
 Proton.GravityWell = GravityWell;
@@ -157,6 +159,7 @@ export {
   Scale,
   Rotate,
   Color,
+  Gradient,
   Cyclone,
   Repulsion,
   GravityWell,

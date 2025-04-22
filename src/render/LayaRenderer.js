@@ -129,9 +129,10 @@ export default class LayaRenderer extends BaseRenderer {
     drawImage(particle, graphics) {
         const w = (particle.body.width * particle.scale) | 0;
         const h = (particle.body.height * particle.scale) | 0;
-        const x = particle.p.x;
-        const y = particle.p.y;
-
+        let x = particle.p.x;
+        let y = particle.p.y;
+        x -= w / 2//粒子x居中
+        // y -= h / 2//粒子y居中
         graphics.save();
         if (this.blendMode) {
             graphics.blendMode = this.blendMode;

@@ -25,6 +25,26 @@ export default {
   },
 
   /**
+   * converts a hex value to a rgba object
+   *
+   * @memberof Proton#Proton.Util
+   * @method hexToRgba
+   *
+   * @param {String} h any hex value, e.g. #000000ff or 000000ff for black with full opacity
+   *
+   * @return {Object} rgba object with r, g, b, a properties
+   */
+  hexToRgba(h) {
+    const hex16 = h.charAt(0) === "#" ? h.substring(1) : h;
+    const r = parseInt(hex16.substring(0, 2), 16);
+    const g = parseInt(hex16.substring(2, 4), 16);
+    const b = parseInt(hex16.substring(4, 6), 16);
+    // 如果有透明度值则解析，否则默认为1
+    const a = hex16.length >= 8 ? parseInt(hex16.substring(6, 8), 16) / 255 : 1;
+    return { r, g, b, a };
+  },
+
+  /**
    * converts a rgb value to a rgb string
    *
    * @memberof Proton#Proton.Util
