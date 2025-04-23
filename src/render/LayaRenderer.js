@@ -101,7 +101,7 @@ export default class LayaRenderer extends BaseRenderer {
 
     isImage(target) {
         if (typeof target == "string") return false;
-        if (target['uuid']) return true
+        if (target['uuid'] || target['_id']) return true
     }
 
     /**

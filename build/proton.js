@@ -1,7 +1,8 @@
 ; window.Proton = window.Proton = {};
 (function (global, factory) {
   factory(global.Proton = {})
-})(window, (function (exports) { 'use strict';
+})(window, (function (exports) {
+  'use strict';
 
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
@@ -397,7 +398,7 @@
       while (i--) {
         try {
           arr[i].destroy(param);
-        } catch (e) {}
+        } catch (e) { }
         delete arr[i];
       }
       arr.length = 0;
@@ -740,7 +741,7 @@
       }
     };
     _proto.removeAllEventListeners = function removeAllEventListeners(type) {
-      if (!type) this._listeners = null;else if (this._listeners) delete this._listeners[type];
+      if (!type) this._listeners = null; else if (this._listeners) delete this._listeners[type];
     };
     _proto.dispatchEvent = function dispatchEvent(type, args) {
       var result = false;
@@ -784,7 +785,7 @@
       if (isInt === void 0) {
         isInt = false;
       }
-      if (!isInt) return a + Math.random() * (b - a);else return (Math.random() * (b - a) >> 0) + a;
+      if (!isInt) return a + Math.random() * (b - a); else return (Math.random() * (b - a) >> 0) + a;
     },
     randomFloating: function randomFloating(center, f, isInt) {
       return this.randomAToB(center - f, center + f, isInt);
@@ -792,7 +793,7 @@
     randomColor: function randomColor() {
       return "#" + ("00000" + (Math.random() * 0x1000000 << 0).toString(16)).slice(-6);
     },
-    randomZone: function randomZone(display) {},
+    randomZone: function randomZone(display) { },
     floor: function floor(num, k) {
       if (k === void 0) {
         k = 4;
@@ -817,9 +818,9 @@
       this.eulerIntegrate(particles, time, damping);
     }
 
-    // Euler Integrate
-    // https://rosettacode.org/wiki/Euler_method
-    ;
+      // Euler Integrate
+      // https://rosettacode.org/wiki/Euler_method
+      ;
     _proto.eulerIntegrate = function eulerIntegrate(particle, time, damping) {
       if (!particle.sleep) {
         particle.old.p.copy(particle.p);
@@ -1053,13 +1054,13 @@
     _createClass(Proton, [{
       key: "fps",
       get:
-      /**
-       * Gets the current frames per second (FPS) setting.
-       * @returns {number|string} The current FPS setting. Returns "auto" if set to default, or a number representing the specific FPS.
-       */
-      function get() {
-        return this._fps;
-      },
+        /**
+         * Gets the current frames per second (FPS) setting.
+         * @returns {number|string} The current FPS setting. Returns "auto" if set to default, or a number representing the specific FPS.
+         */
+        function get() {
+          return this._fps;
+        },
       set: function set(fps) {
         this._fps = fps;
         this._interval = fps === "auto" ? Proton.DEFAULT_INTERVAL : MathUtil.floor(1 / fps, 7);
@@ -1188,7 +1189,7 @@
         if (b === undefined) {
           return new Span(a);
         } else {
-          if (c === undefined) return new Span(a, b);else return new Span(a, b, c);
+          if (c === undefined) return new Span(a, b); else return new Span(a, b, c);
         }
       }
     }
@@ -1342,7 +1343,7 @@
       return 0.5 * ((value -= 2) * value * (((s *= 1.525) + 1) * value + s) + 2);
     },
     getEasing: function getEasing(ease) {
-      if (typeof ease === "function") return ease;else return this[ease] || this.easeLinear;
+      if (typeof ease === "function") return ease; else return this[ease] || this.easeLinear;
     }
   };
 
@@ -1401,7 +1402,7 @@
      * @returns {number} The gradient in radians.
      */;
     _proto.getGradient = function getGradient() {
-      if (this.x !== 0) return Math.atan2(this.y, this.x);else if (this.y > 0) return MathUtil.PI_2;else if (this.y < 0) return -MathUtil.PI_2;
+      if (this.x !== 0) return Math.atan2(this.y, this.x); else if (this.y > 0) return MathUtil.PI_2; else if (this.y < 0) return -MathUtil.PI_2;
     }
 
     /**
@@ -2021,7 +2022,7 @@
      */;
     ArraySpan.createArraySpan = function createArraySpan(arr) {
       if (!arr) return null;
-      if (arr instanceof ArraySpan) return arr;else return new ArraySpan(arr);
+      if (arr instanceof ArraySpan) return arr; else return new ArraySpan(arr);
     };
     return ArraySpan;
   }(Span);
@@ -2037,7 +2038,7 @@
     }
     var _proto = Rectangle.prototype;
     _proto.contains = function contains(x, y) {
-      if (x <= this.right && x >= this.x && y <= this.bottom && y >= this.y) return true;else return false;
+      if (x <= this.right && x >= this.x && y <= this.bottom && y >= this.y) return true; else return false;
     };
     return Rectangle;
   }();
@@ -2108,7 +2109,7 @@
         this.startTime = 0;
         this.nextTime = this.timePan.getValue();
         if (this.numPan.b === 1) {
-          if (this.numPan.getValue(false) > 0.5) return 1;else return 0;
+          if (this.numPan.getValue(false) > 0.5) return 1; else return 0;
         } else {
           return this.numPan.getValue(true);
         }
@@ -2119,9 +2120,9 @@
   }();
 
   var Initialize = /*#__PURE__*/function () {
-    function Initialize() {}
+    function Initialize() { }
     var _proto = Initialize.prototype;
-    _proto.reset = function reset() {};
+    _proto.reset = function reset() { };
     _proto.init = function init(emitter, particle) {
       if (particle) {
         this.initialize(particle);
@@ -2130,9 +2131,9 @@
       }
     }
 
-    // sub class init
-    ;
-    _proto.initialize = function initialize(target) {};
+      // sub class init
+      ;
+    _proto.initialize = function initialize(target) { };
     return Initialize;
   }();
 
@@ -2173,7 +2174,7 @@
      */
     var _proto = Life.prototype;
     _proto.initialize = function initialize(target) {
-      if (this.lifePan.a === Infinity) target.life = Infinity;else target.life = this.lifePan.getValue();
+      if (this.lifePan.a === Infinity) target.life = Infinity; else target.life = this.lifePan.getValue();
     };
     return Life;
   }(Initialize);
@@ -2186,8 +2187,8 @@
       this.alert = true;
     }
     var _proto = Zone.prototype;
-    _proto.getPosition = function getPosition() {};
-    _proto.crossing = function crossing(particle) {};
+    _proto.getPosition = function getPosition() { };
+    _proto.crossing = function crossing(particle) { };
     _proto.destroy = function destroy() {
       this.vector = null;
     };
@@ -2631,7 +2632,7 @@
      * Initialize the behaviour's parameters for a particle
      * @param {Proton.Particle} particle - The particle to initialize
      */;
-    _proto.initialize = function initialize(particle) {}
+    _proto.initialize = function initialize(particle) { }
 
     /**
      * Compute the behaviour's life cycle
@@ -3183,7 +3184,7 @@
      */;
     _proto.initialize = function initialize(particle) {
       particle.data.alphaA = this.a.getValue();
-      if (this.same) particle.data.alphaB = particle.data.alphaA;else particle.data.alphaB = this.b.getValue();
+      if (this.same) particle.data.alphaB = particle.data.alphaA; else particle.data.alphaB = this.b.getValue();
     }
 
     /**
@@ -3750,7 +3751,7 @@
     /**
      * @inheritdoc
      */;
-    _proto.initialize = function initialize(particle) {}
+    _proto.initialize = function initialize(particle) { }
 
     /**
      * Apply this behaviour for all particles every time
@@ -4004,8 +4005,8 @@
       Util.emptyArray(this.behaviours);
     }
 
-    // emitter update
-    ;
+      // emitter update
+      ;
     _proto.update = function update(time) {
       this.age += time;
       if (this.age >= this.life || this.dead) this.destroy();
@@ -4346,7 +4347,7 @@
       proton.addEventListener("PARTICLE_UPDATE", this._particleUpdateHandler);
       proton.addEventListener("PARTICLE_DEAD", this._particleDeadHandler);
     };
-    _proto.resize = function resize(width, height) {};
+    _proto.resize = function resize(width, height) { };
     _proto.destroy = function destroy() {
       this.remove();
       this.pool.destroy();
@@ -4364,13 +4365,13 @@
       this.parent.removeEventListener("PARTICLE_DEAD", this._particleDeadHandler);
       this.parent = null;
     };
-    _proto.onProtonUpdate = function onProtonUpdate() {};
-    _proto.onProtonUpdateAfter = function onProtonUpdateAfter() {};
-    _proto.onEmitterAdded = function onEmitterAdded(emitter) {};
-    _proto.onEmitterRemoved = function onEmitterRemoved(emitter) {};
-    _proto.onParticleCreated = function onParticleCreated(particle) {};
-    _proto.onParticleUpdate = function onParticleUpdate(particle) {};
-    _proto.onParticleDead = function onParticleDead(particle) {};
+    _proto.onProtonUpdate = function onProtonUpdate() { };
+    _proto.onProtonUpdateAfter = function onProtonUpdateAfter() { };
+    _proto.onEmitterAdded = function onEmitterAdded(emitter) { };
+    _proto.onEmitterRemoved = function onEmitterRemoved(emitter) { };
+    _proto.onParticleCreated = function onParticleCreated(particle) { };
+    _proto.onParticleUpdate = function onParticleUpdate(particle) { };
+    _proto.onParticleDead = function onParticleDead(particle) { };
     return BaseRenderer;
   }();
 
@@ -4622,8 +4623,8 @@
       return typeof particle.body === "object" && particle.body && !particle.body.isInner;
     }
 
-    // private method
-    ;
+      // private method
+      ;
     _proto.addImg2Body = function addImg2Body(img, particle) {
       if (particle.dead) return;
       particle.body = this.pool.get(img, particle);
@@ -4635,8 +4636,8 @@
       return this.createSprite(body, particle);
     }
 
-    // private methods
-    ;
+      // private methods
+      ;
     _proto.createCircle = function createCircle(particle) {
       var dom = DomUtil.createDiv(particle.id + "_dom", 2 * particle.radius, 2 * particle.radius);
       dom.style.borderRadius = particle.radius + "px";
@@ -4700,8 +4701,8 @@
       if (particle.graphics) this.pool.expire(particle.graphics);
     }
 
-    // private
-    ;
+      // private
+      ;
     _proto.createSprite = function createSprite(particle) {
       particle.body = this.pool.get(particle.body);
       if (particle.body.parent) return;
@@ -4769,7 +4770,7 @@
     _proto.onProtonUpdateAfter = function onProtonUpdateAfter() {
       this.context.putImageData(this.imageData, this.rectangle.x, this.rectangle.y);
     };
-    _proto.onParticleCreated = function onParticleCreated(particle) {};
+    _proto.onParticleCreated = function onParticleCreated(particle) { };
     _proto.onParticleUpdate = function onParticleUpdate(particle) {
       if (this.imageData) {
         this.setPixel(this.imageData, particle.p.x - this.rectangle.x >> 0, particle.p.y - this.rectangle.y >> 0, particle);
@@ -4784,7 +4785,7 @@
       imagedata.data[i + 2] = rgb.b;
       imagedata.data[i + 3] = particle.alpha * 255;
     };
-    _proto.onParticleDead = function onParticleDead(particle) {}
+    _proto.onParticleDead = function onParticleDead(particle) { }
 
     /**
      * Destroys the renderer and cleans up resources.
@@ -4833,9 +4834,9 @@
           Sprite: {}
         };
         this.createFromImage = PIXIClass.Sprite.from || PIXIClass.Sprite.fromImage;
-      } catch (e) {}
+      } catch (e) { }
     };
-    _proto.onProtonUpdate = function onProtonUpdate() {}
+    _proto.onProtonUpdate = function onProtonUpdate() { }
 
     /**
      * @param particle
@@ -4881,7 +4882,7 @@
       target.rotation = particle.rotation * MathUtil.PI_180; // MathUtil.PI_180;
     };
     _proto.createBody = function createBody(body, particle) {
-      if (body.isCircle) return this.createCircle(particle);else return this.createSprite(body);
+      if (body.isCircle) return this.createCircle(particle); else return this.createSprite(body);
     };
     _proto.createSprite = function createSprite(body) {
       var sprite = body.isInner ? this.createFromImage(body.src) : new PIXIClass.Sprite(body);
@@ -4928,11 +4929,11 @@
     }
     var _proto = MStack.prototype;
     _proto.set = function set(m, i) {
-      if (i === 0) Mat3.set(m, this.mats[0]);else Mat3.multiply(this.mats[i - 1], m, this.mats[i]);
+      if (i === 0) Mat3.set(m, this.mats[0]); else Mat3.multiply(this.mats[i - 1], m, this.mats[i]);
       this.size = Math.max(this.size, i + 1);
     };
     _proto.push = function push(m) {
-      if (this.size === 0) Mat3.set(m, this.mats[0]);else Mat3.multiply(this.mats[this.size - 1], m, this.mats[this.size]);
+      if (this.size === 0) Mat3.set(m, this.mats[0]); else Mat3.multiply(this.mats[this.size - 1], m, this.mats[this.size]);
       this.size++;
     };
     _proto.pop = function pop() {
@@ -5121,8 +5122,8 @@
       }
     }
 
-    // private
-    ;
+      // private
+      ;
     _proto.addImg2Body = function addImg2Body(img, particle) {
       if (particle.dead) return;
       particle.body = img;
@@ -5147,7 +5148,7 @@
         this.mstack.pop();
       }
     };
-    _proto.onParticleDead = function onParticleDead(particle) {};
+    _proto.onParticleDead = function onParticleDead(particle) { };
     _proto.updateMatrix = function updateMatrix(particle) {
       var moveOriginMatrix = WebGLUtil.makeTranslation(-particle.data.textureWidth / 2, -particle.data.textureHeight / 2);
       var translationMatrix = WebGLUtil.makeTranslation(particle.p.x, particle.p.y);
@@ -5284,7 +5285,7 @@
     };
     _proto.isImage = function isImage(target) {
       if (typeof target == "string") return false;
-      if (target['uuid']) return true;
+      if (target['uuid'] || target['_id']) return true;
     }
 
     /**
@@ -5433,7 +5434,7 @@
       var B = -this.dx;
       var C = this.dot;
       var D = B === 0 ? 1 : B;
-      if ((A * x + B * y + C) * D > 0) return true;else return false;
+      if ((A * x + B * y + C) * D > 0) return true; else return false;
     }
 
     /**
@@ -5670,8 +5671,8 @@
     _proto.crossing = function crossing(particle) {
       // particle dead zone
       if (this.crossType === "dead") {
-        if (particle.p.x + particle.radius < this.x) particle.dead = true;else if (particle.p.x - particle.radius > this.x + this.width) particle.dead = true;
-        if (particle.p.y + particle.radius < this.y) particle.dead = true;else if (particle.p.y - particle.radius > this.y + this.height) particle.dead = true;
+        if (particle.p.x + particle.radius < this.x) particle.dead = true; else if (particle.p.x - particle.radius > this.x + this.width) particle.dead = true;
+        if (particle.p.y + particle.radius < this.y) particle.dead = true; else if (particle.p.y - particle.radius > this.y + this.height) particle.dead = true;
       }
 
       // particle bound zone
